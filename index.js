@@ -37,8 +37,15 @@ app.use(cors({
     credentials: true,
 }))
 app.use(express.json());
-// app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
+
+app.use((req,res,next)=>{
+    req.io = io;
+    next();
+})
+
+connectDb();
 
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
@@ -47,8 +54,8 @@ app.use('/api/item', itemRoute);
 app.use('/api/order', orderRoute);
 
 handleSocket(io)
-server.listen(port, () => {
-    connectDb();
-    console.log(`server is running at port ${port}`);
-})
-
+// server.listen(port, () => {
+  
+//     console.log(`server is running at port ${port}`);
+// })
+export default server
