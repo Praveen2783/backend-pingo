@@ -40,12 +40,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-app.use((req,res,next)=>{
-    req.io = io;
-    next();
-})
+// app.use((req,res,next)=>{
+//     req.io = io;
+//     next();
+// })
 
-connectDb();
+// connectDb();
 
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
@@ -54,8 +54,8 @@ app.use('/api/item', itemRoute);
 app.use('/api/order', orderRoute);
 
 handleSocket(io)
-// server.listen(port, () => {
+server.listen(port, () => {
   
-//     console.log(`server is running at port ${port}`);
-// })
-export default server
+    console.log(`server is running at port ${port}`);
+})
+// export default server
