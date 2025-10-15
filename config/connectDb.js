@@ -5,7 +5,11 @@ const connectDb = async ()=>{
     mongoose.connection.on('connected',()=>{
         console.log("Connected to MongoDB");
     })
-    await mongoose.connect(`${process.env.MONGODB_URL}/foodDelivery`)
+    await mongoose.connect(`${process.env.MONGODB_URL}/foodDelivery`,{
+      
+        useNewUrlParser:true,
+        useUnifiedTopology:true,
+    })
 }
 
 export default connectDb
