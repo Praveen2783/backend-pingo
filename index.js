@@ -20,7 +20,7 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
     cors: {
-        origin: "frontend-pingo.vercel.app",
+        origin: "https://frontend-pingo.vercel.app",
         credentials: true,
         methods:['POST','GET','DELETE']
     }
@@ -33,7 +33,7 @@ app.set("io",io)
 const port = process.env.PORT || 8000;
 
 app.use(cors({
-    origin: "frontend-pingo.vercel.app",
+    origin: "https://frontend-pingo.vercel.app",
     credentials: true,
 }))
 app.use(express.json());
