@@ -40,10 +40,21 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
+let isconnected = false;
 app.use((req,res,next)=>{
-    req.io = io;
-    next();
+ if(!isconnected){
+    connectDb().then(()=>{
+        isconnected = true;
+        next();
+    }).catch((err)=>{
+        console.log("Error connecting to DB",err);
+        res.status(500).send("Error connecting to DB");
+    })
+    }else{
+        next();
+    }
 })
+
 
 
 
@@ -54,8 +65,8 @@ app.use('/api/item', itemRoute);
 app.use('/api/order', orderRoute);
 
 handleSocket(io)
-server.listen(port, () => {
-  connectDb();
-    console.log(`server is running at port ${port}`);
-})
+// server.listen(port, () => {
+//   connectDb();
+//     console.log(`server is running at port ${port}`);
+// })
 // export default server
