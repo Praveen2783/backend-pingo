@@ -69,4 +69,4 @@ handleSocket(io)
 //   connectDb();
 //     console.log(`server is running at port ${port}`);
 // })
-export { server }
+export default server 
