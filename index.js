@@ -45,7 +45,7 @@ app.use(cookieParser());
 //     next();
 // })
 
-// connectDb();
+
 
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
@@ -55,7 +55,7 @@ app.use('/api/order', orderRoute);
 
 handleSocket(io)
 server.listen(port, () => {
-  
+  connectDb();
     console.log(`server is running at port ${port}`);
 })
 // export default server
